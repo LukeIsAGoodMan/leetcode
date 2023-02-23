@@ -1,0 +1,25 @@
+Given an integer array nums that may contain duplicates, return all possible 
+subsets
+ (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<>();
+        Arrays.sort(nums);
+        //ArrayList not arraylist
+        backtrack(ret,new ArrayList<>(),nums,0);
+        return ret;
+    }
+    public void backtrack(List<List<Integer>> list, List<Integer> temp, int[] nums, int start){
+        list.add(new ArrayList<>(temp));
+        for(int i=start;i<nums.length;i++){
+            if(i>start && nums[i]==nums[i-1]) continue;
+            temp.add(nums[i]);
+            backtrack(list,temp,nums,i+1);
+            temp.remove(temp.size()-1);
+        }
+    }
+}
+
+//in case we have repeated sets. here we use i>start && nums[i]==nums[i-1] to escape the repeat case,this criteria is extremly beatiful.
