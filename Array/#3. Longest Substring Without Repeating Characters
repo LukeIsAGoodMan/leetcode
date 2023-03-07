@@ -1,0 +1,24 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int largest=0;
+        for(int i=0;i<n;i++){
+            int count=0;
+            int []check = new int[256];
+            for (int j=i;j<n;j++){
+                int val = s.charAt(j);
+                check[val]++;
+                if (check[val]<=1){
+                    count++;
+                }
+                else{
+                    break;
+                }
+            }
+            if(count>largest){
+                largest=count;
+            }
+        }
+        return largest;
+    }
+}
